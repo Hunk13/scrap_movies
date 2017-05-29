@@ -5,7 +5,7 @@ search_text = 'Max'
 abort('Need only one parameter - file name.') if ARGV.length > 1
 
 file = ARGV[0] || scrap_file
-abort("File '#{ARGV[0]}' not exist.") unless File.exist?(file)
+abort('File not exist.') unless File.exist?(file)
 
 File.open(file).each_line do |line|
   split_line = line.split('|')
