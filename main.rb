@@ -10,12 +10,13 @@ array_of_movies = File.open(file).each_line.map do |line|
   FIELDS.zip(line.strip.split('|')).to_h
 end
 
-def cool_print(input_hash = {})
+def cool_print(input_hash)
   "#{input_hash[:title]} (#{input_hash[:date]}; #{input_hash[:genre]}) - #{input_hash[:length]}"
 end
 
 puts 'Show 5 first largest movies:'
-array_of_movies.sort_by { |movie| -movie[:length].to_i }.first(5).each do |movie|
+array_of_movies.sort_by { |movie| -movie[:length].to_i }
+               .first(5).each do |movie|
   puts cool_print(movie)
 end
 
@@ -28,11 +29,9 @@ end
 
 puts ''
 puts 'Show all directors alphabetically:'
-array_of_movies.uniq { |movie| movie[:director] }
-               .sort_by { |movie| movie[:director].split(' ').last }.each do |movie|
-  puts movie[:director].split.reverse.join(' ')
-end
+puts array_of_movies.uniq { |movie| movie[:director] }
+                    .map { |movie| movie[:director].split(' ').reverse.join(' ') }.sort
 
 puts ''
 puts 'Number of films not in the USA:'
-puts array_of_movies.select { |movie| movie[:country] != 'USA' }.count
+puts array_of_movies.count { |movie| movie[:country] != 'USA' }
