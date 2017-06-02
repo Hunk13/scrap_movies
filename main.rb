@@ -1,13 +1,13 @@
 # second lesson
 scrap_file = 'movies.txt'
-fields = %i(link title year country date genre length raiting director actors)
+FIELDS = %i(link title year country date genre length raiting director actors).freeze
 
 abort('Need only one parameter - file name.') if ARGV.length > 1
 file = ARGV[0] || scrap_file
 abort('File not exist.') unless File.exist?(file)
 
 array_of_movies = File.open(file).each_line.map do |line|
-  fields.map.zip(line.strip.split('|')).to_h
+  FIELDS.zip(line.strip.split('|')).to_h
 end
 
 def cool_print(input_hash = {})
@@ -35,10 +35,4 @@ end
 
 puts ''
 puts 'Number of films not in the USA:'
-counts = Hash.new(0)
-array_of_movies.select { |movie| movie[:country] != 'USA' }.each do |movie|
-  counts[movie] += 1
-  puts cool_print(movie) + '. Country: ' + movie[:country]
-end
-
-puts 'All number of films not in the USA: ' + counts.size.to_s
+puts array_of_movies.select { |movie| movie[:country] != 'USA' }.count
