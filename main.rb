@@ -29,8 +29,7 @@ end
 
 puts ''
 puts 'Show all directors alphabetically:'
-puts array_of_movies.uniq { |movie| movie[:director] }
-                    .map { |movie| movie[:director].split(' ').reverse.join(' ') }.sort
+puts array_of_movies.map { |movie| movie[:director].split(' ').reverse.join(' ') }.uniq.sort
 
 puts ''
 puts 'Number of films not in the USA:'
