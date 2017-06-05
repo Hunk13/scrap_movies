@@ -40,9 +40,9 @@ puts array_of_movies.count { |movie| movie.country != 'USA' }
 
 puts ''
 puts 'Show statistic from month:'
-array_of_movies.map { |movie| Date._parse(movie.date)[:mon] }
+array_of_movies.select { |movie| movie.date.include?('-') }
+               .map { |d| Date.strptime(d.date, '%Y-%m').mon }
                .each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
-               .reject { |key, _value| !key.between?(1, 12) }
                .sort
                .each do |k, v|
   puts "In #{Date::MONTHNAMES[k]} made #{v} films"
