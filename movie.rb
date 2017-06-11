@@ -3,7 +3,7 @@ class Movie
   attr_reader :link, :title, :year, :country, :date,
               :genre, :length, :rating, :director, :actors
 
-  def initialize(movie, movie_collection)
+  def initialize(movie)
     @link     = movie[0]
     @title    = movie[1]
     @year     = movie[2].to_i

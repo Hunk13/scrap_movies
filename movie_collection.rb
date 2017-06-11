@@ -10,7 +10,7 @@ class MovieCollection
     @file = file
     abort("File #{@file} not exist.") unless File.exist?(@file)
     @movies = CSV.read(@file, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.new(movie, self)
+      |movie| Movie.new(movie)
     }
   end
 
