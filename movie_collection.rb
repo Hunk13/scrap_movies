@@ -6,12 +6,9 @@ class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
   SCRAP_FILE = 'movies.txt'
 
-  def initialize(file = SCRAP_FILE)
-    @file = file
-    abort("File #{@file} not exist.") unless File.exist?(@file)
-    @movies = CSV.read(@file, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.new(movie)
-    }
+  def initialize(file_name)
+    abort("File #{file_name} not exist.") unless File.file?(file_name)
+    @movies = parse_file(file_name)
   end
 
   def all
@@ -28,5 +25,13 @@ class MovieCollection
 
   def stats(field)
 
+  end
+
+  private
+
+  def parse_file(file_name)
+    CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
+      |movie| Movie.new(self, movie)
+    }
   end
 end
