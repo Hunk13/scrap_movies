@@ -21,6 +21,9 @@ puts ''
 puts 'Has first movie genre Crime?'
 puts movies.all.first.has_genre?('Crime')
 puts ''
+puts 'Has first movie genre Action?'
+puts movies.all.first.has_genre?('Action')
+puts ''
 puts 'Has first movie genre Criminalis (not exist)?'
 begin
   movies.all.first.has_genre?('Criminalis')

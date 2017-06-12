@@ -1,8 +1,7 @@
 # Class Movie. For object Movie
 class Movie
   attr_reader :link, :title, :year, :country, :date,
-              :genre, :length, :rating, :director, :actors,
-              :movie_collection
+              :genre, :length, :rating, :director, :actors
 
   def initialize(movie_collection, movie)
     @link     = movie[0]
@@ -19,7 +18,7 @@ class Movie
   end
 
   def has_genre?(genre)
-    raise("Genre '#{genre}' not found movies genres") unless @movie_collection.genre_exists?(genre)
+    raise("Genre '#{genre}' not found in movies genres") unless @movie_collection.genre_exists?(genre)
     @genre.include?(genre)
   end
 
