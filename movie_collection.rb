@@ -5,7 +5,7 @@ class MovieCollection
 
   attr_reader :genres
 
-  def initialize(file_name)
+  def initialize(file_name = SCRAP_FILE)
     abort("File #{file_name} not exist.") unless File.file?(file_name)
     @movies = parse_file(file_name)
     @genres = @movies.flat_map(&:genre).uniq

@@ -5,7 +5,7 @@ require 'awesome_print'
 require_relative 'movie'
 require_relative 'movie_collection'
 
-movies = MovieCollection.new('movies.txt')
+movies = MovieCollection.new
 puts 'All movies (cropped to 5 first)'
 puts movies.all.first(5)
 puts ''
