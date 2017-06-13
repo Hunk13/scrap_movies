@@ -1,6 +1,3 @@
-require 'CSV'
-require 'date'
-
 # Class MovieCollection
 class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
@@ -22,12 +19,26 @@ class MovieCollection
     @movies.sort_by(&sort_field)
   end
 
-  def filter(field)
-
+  def filter(filter_field)
+    filter_field.reduce(all) do |field, (key, value)|
+      field.select do |f|
+        field = f.send(key)
+        if field.is_a?(Array)
+          field.grep(value).any?
+        else
+          value === field
+        end
+      end
+    end
   end
 
   def stats(field)
-
+    all.flat_map(&field)
+       .each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
+       .sort
+       .each do |k, v|
+      puts "In #{k} include #{v} elements"
+    end
   end
 
   def genre_exists?(genre)
