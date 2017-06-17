@@ -1,10 +1,28 @@
 require 'CSV'
 require 'date'
 require 'pry'
+require 'rspec'
 require 'awesome_print'
 require_relative 'movie'
+require_relative 'classic_movie'
+require_relative 'modern_movie'
+require_relative 'ancient_movie'
+require_relative 'new_movie'
 require_relative 'movie_collection'
+require_relative 'netflix'
+require_relative 'theatre'
 
+RSpec.describe MovieCollection do
+  it 'sums the movies' do
+    movies = MovieCollection.new
+
+    expect(movies.all.count).to eq(250)
+  end
+end
+
+# movies = MovieCollection.new
+# puts movies.all
+# puts movies.all.first.movie_price
 movies = MovieCollection.new
 puts 'All movies (cropped to 5 first)'
 puts movies.all.first(5)

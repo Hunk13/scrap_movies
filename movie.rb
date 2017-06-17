@@ -17,6 +17,19 @@ class Movie
     @movie_collection = movie_collection
   end
 
+  def new_movie(movie_collection, movie)
+    case movie[2].to_i
+    when 1900...1945
+      AncientMovie.new(movie_collection, movie)
+    when 1945...1968
+      ClassicMovie.new(movie_collection, movie)
+    when 1968...2000
+      ModernMovie.new(movie_collection, movie)
+    else
+      NewMovie.new(movie_collection, movie)
+    end
+  end
+
   def has_genre?(genre)
     raise("Genre '#{genre}' not found in movies genres") unless @movie_collection.genre_exists?(genre)
     @genre.include?(genre)
