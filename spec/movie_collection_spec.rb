@@ -21,7 +21,11 @@ describe MovieCollection do
                           title: 'The Shawshank Redemption')).to be_an(Array)
   end
 
-  it 'Statistic by genre must be Hash' do
-    expect(subject.stats(:genre)).to be_an(Hash)
+  it 'Statistic by genre must be Array' do
+    expect(subject.stats(:genre)).to be_an(Array)
+  end
+
+  it 'Statistic puts by genre must be Hash' do
+    expect(subject.stats_puts(subject.stats(:genre))).to be_an(Hash)
   end
 end

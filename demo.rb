@@ -26,7 +26,7 @@ puts 'Movies filter by field (cropped to 5 first)'
 puts movies.filter(genre: 'Comedy').first(5)
 puts ''
 puts 'Movies statistics by field'
-movies.stats(:country)
+movies.stats_puts(movies.stats(:country))
 puts ''
 puts 'First movie'
 puts movies.all.first

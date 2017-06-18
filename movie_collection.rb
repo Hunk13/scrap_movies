@@ -33,10 +33,12 @@ class MovieCollection
   end
 
   def stats(field)
-    all.flat_map(&field)
-       .sort
-       .each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
-       .each do |k, v|
+    all.flat_map(&field).sort
+  end
+
+  def stats_puts(field_array)
+    field_array.each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
+               .each do |k, v|
       puts "In #{k} include #{v} elements"
     end
   end
