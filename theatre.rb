@@ -1,5 +1,4 @@
+# class Theatre child from MovieCollection
 class Theatre < MovieCollection
-  def show
-
-  end
+  def show; end
 end

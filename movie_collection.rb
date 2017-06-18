@@ -1,7 +1,7 @@
 # Class MovieCollection
 class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
-  SCRAP_FILE = 'movies.txt'
+  SCRAP_FILE = 'movies.txt'.freeze
 
   attr_reader :genres
 
@@ -26,7 +26,7 @@ class MovieCollection
         if field.is_a?(Array)
           field.grep(value).any?
         else
-          value === field
+          field.equal?(value)
         end
       end
     end
@@ -34,8 +34,8 @@ class MovieCollection
 
   def stats(field)
     all.flat_map(&field)
-       .each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
        .sort
+       .each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
        .each do |k, v|
       puts "In #{k} include #{v} elements"
     end

@@ -30,7 +30,7 @@ class Movie
     end
   end
 
-  def has_genre?(genre)
+  def genre?(genre)
     raise("Genre '#{genre}' not found in movies genres") unless @movie_collection.genre_exists?(genre)
     @genre.include?(genre)
   end

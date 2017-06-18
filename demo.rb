@@ -12,20 +12,12 @@ require_relative 'movie_collection'
 require_relative 'netflix'
 require_relative 'theatre'
 
-RSpec.describe MovieCollection do
-  it 'sums the movies' do
-    movies = MovieCollection.new
-
-    expect(movies.all.count).to eq(250)
-  end
-end
-
-# movies = MovieCollection.new
-# puts movies.all
-# puts movies.all.first.movie_price
 movies = MovieCollection.new
 puts 'All movies (cropped to 5 first)'
 puts movies.all.first(5)
+puts ''
+puts 'Price of first movie'
+puts movies.all.first.movie_price
 puts ''
 puts 'Movies sort by field (cropped to 5 first)'
 puts movies.sort_by(:genre).first(5)
@@ -40,14 +32,14 @@ puts 'First movie'
 puts movies.all.first
 puts ''
 puts 'Has first movie genre Crime?'
-puts movies.all.first.has_genre?('Crime')
+puts movies.all.first.genre?('Crime')
 puts ''
 puts 'Has first movie genre Action?'
-puts movies.all.first.has_genre?('Action')
+puts movies.all.first.genre?('Action')
 puts ''
 puts 'Has first movie genre Criminalis (not exist)?'
 begin
-  movies.all.first.has_genre?('Criminalis')
+  movies.all.first.genre?('Criminalis')
 rescue RuntimeError => e
   puts e
 end
