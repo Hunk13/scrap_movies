@@ -1,6 +1,7 @@
 require 'CSV'
 require 'date'
 require 'rspec'
+require 'fuubar'
 require_relative '../movie_collection'
 require_relative '../movie'
 require_relative '../netflix'
@@ -12,4 +13,5 @@ require_relative '../new_movie'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.fuubar_progress_bar_options = { :format => 'My Fuubar! <%B> %p%% %a' }
 end
