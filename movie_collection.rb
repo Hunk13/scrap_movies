@@ -20,16 +20,7 @@ class MovieCollection
   end
 
   def filter(filter_field)
-    filter_field.reduce(all) do |field, (key, value)|
-      field.select do |f|
-        field = f.send(key)
-        if field.is_a?(Array)
-          field.grep(value).any?
-        else
-          field.equal?(value)
-        end
-      end
-    end
+    @movies.select { |x| x.matches?(filter_field) }
   end
 
   def stats(field)

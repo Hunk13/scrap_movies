@@ -30,6 +30,24 @@ class Movie
     end
   end
 
+  def matches?(params)
+    params.reduce(true) do |res, (key, value)|
+      res && matches_filter?(key, value)
+    end
+  end
+
+  def matches_filter?(key, value)
+    if send(key).is_a?(Array)
+      if value.is_a?(Array)
+        send(key).any? { |v| value.include?(v) }
+      else
+        send(key).any? { |v| v == value }
+      end
+    else
+      value === send(key)
+    end
+  end
+
   def genre?(genre)
     raise("Genre '#{genre}' not found in movies genres") unless @movie_collection.genre_exists?(genre)
     @genre.include?(genre)
