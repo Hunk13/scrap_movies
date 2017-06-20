@@ -7,10 +7,10 @@ class Theatre < MovieCollection
            }
 
   def show(time)
-    movie = filter(PERIOD[time]).select { |movie| movie.rating * rand }.last
+    mov = filter(PERIOD[time]).select { |movie| movie.rating * rand }.last
     start_time = Time.now
-    end_time = start_time + movie.length * 60
-    puts "«Now showing: #{movie.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}»"
+    end_time = start_time + mov.length * 60
+    puts "«Now showing: #{mov.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}»"
   end
 
   def when?(movie_name)
