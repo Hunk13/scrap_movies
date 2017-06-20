@@ -8,7 +8,9 @@ class Netflix < MovieCollection
   end
 
   def show(params)
-    movie = filter(params).sort_by { |mov| mov.rating * rand(10) }.last
+    movie = filter(params).sort_by { |movie| movie.rating * rand }.last
+    raise("Film Not Found") if filter(params).empty?
+    raise("Not enough money. This movie cost #{movie.movie_price}. Your balance #{@money}") if @money < movie.movie_price
     start_time = Time.now
     end_time = start_time + movie.length * 60
     @money -= movie.movie_price

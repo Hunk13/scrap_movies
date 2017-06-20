@@ -13,9 +13,14 @@ require_relative 'netflix'
 require_relative 'theatre'
 
 # movie_netflix = Netflix.new('movies.txt')
-# puts movie_netflix.show(genre: 'Comedy')
-# puts movie_netflix.how_much?('The Terminator').size
-# puts movie_netflix.pay(10)
+# movie_netflix.show(genre: 'Action')
+# puts movie_netflix.how_much?('The Terminator')
+# puts movie_netflix.pay(5)
+# puts movie_netflix.how_much?('The Terminator')
+# puts movie_netflix.show(title: 'The Terminator')
+# puts movie_netflix.show(title: 'The Terminator')
+# puts movie_netflix.show(title: 's')
+# puts movie_netflix.money
 
 # movies = MovieCollection.new
 # puts 'All movies (cropped to 5 first)'
