@@ -18,9 +18,9 @@ class Netflix < MovieCollection
   end
 
   def how_much?(input_movie_name)
-    movie = filter(title: input_movie_name).select { |movie| movie.rating * rand }.last
-    raise ArgumentError, "Movie '#{input_movie_name}' not found" if movie.nil?
-    movie.movie_price
+    mov = filter(title: input_movie_name).select { |mov| mov.rating * rand }.last
+    raise ArgumentError, "Movie '#{input_movie_name}' not found" if mov.nil?
+    mov.movie_price
   end
 
   def pay(money)
