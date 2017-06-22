@@ -1,15 +1,29 @@
 describe Theatre do
-  subject { described_class.new('movies.txt') }
+  subject(:collection) { described_class.new('movies.txt') }
 
-  it 'Testing show movie' do
-    expect { subject.show('Morning') }.to output(/^«[a-z].*[a-z]\s\d{2}:\d{2}:\d{2} - \d{2}:\d{2}:\d{2}»/i).to_stdout
+  describe '#show' do
+    subject { collection.show(time) }
+
+    context 'when exist period' do
+      let(:time) { 'Morning' }
+      it { expect { subject }
+        .to output(/^«[a-z].*[a-z]\s\d{2}:\d{2}:\d{2} - \d{2}:\d{2}:\d{2}»/i)
+        .to_stdout
+      }
+    end
+
+    context 'when not exist period' do
+      let(:time) { 'Night' }
+      it { expect { subject }.to raise_error(RuntimeError, 'Films not showing in Night') }
+    end
   end
 
-  it 'Testing not exist period' do
-    expect { subject.show('Night') }.to raise_error(NoMethodError)
-  end
+  describe '#when?' do
+    subject { collection.when?(movie_name) }
 
-  it 'Testing when show movie' do
-    expect(subject.when?('Gone with the Wind')).to eq(%w(Morning Evening))
+    context 'when show movie' do
+      let(:movie_name) { 'Gone with the Wind' }
+      it { expect(subject).to eq(%w(Morning Evening)) }
+    end
   end
 end

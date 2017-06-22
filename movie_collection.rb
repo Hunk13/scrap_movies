@@ -43,7 +43,7 @@ class MovieCollection
 
   def parse_file(file_name)
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.new(self, movie).new_movie(self, movie)
+      |movie| Movie.create_movies(self, movie)
     }
   end
 end

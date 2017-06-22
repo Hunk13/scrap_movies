@@ -7,6 +7,7 @@ class Theatre < MovieCollection
            }
 
   def show(time)
+    raise("Films not showing in #{time}") if PERIOD[time].nil?
     mov = filter(PERIOD[time]).select { |movie| movie.rating * rand }.last
     start_time = Time.now
     end_time = start_time + mov.length * 60

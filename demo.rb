@@ -23,6 +23,11 @@ end
 puts ''
 puts 'How much one movie'
 puts movie_netflix.how_much?('The Terminator')
+begin
+  puts movie_netflix.how_much?(title: 'The Terminators')
+rescue RuntimeError => e
+  puts e
+end
 movie_netflix.pay(5)
 puts ''
 puts 'Show one movie, money is enough'

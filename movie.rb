@@ -17,7 +17,7 @@ class Movie
     @movie_collection = movie_collection
   end
 
-  def new_movie(movie_collection, movie)
+  def self.create_movies(movie_collection, movie)
     case movie[2].to_i
     when 1900...1945
       AncientMovie.new(movie_collection, movie)
