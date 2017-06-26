@@ -1,4 +1,3 @@
-# class ClassicMovie
 class ClassicMovie < Movie
   def to_s
     "#{@title} — classical movie, director #{@director} (#{amount_director_movies} more of his films in the list)"

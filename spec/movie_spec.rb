@@ -1,5 +1,5 @@
 describe Movie do
-  subject(:collection) { MovieCollection.new('movies.txt') }
+  subject(:collection) { MovieCollection.new('spec/movies.txt') }
   subject(:movie) { collection.all.first }
 
   describe '#genre?' do
@@ -22,18 +22,14 @@ describe Movie do
   end
 
   describe '#actors' do
-    subject { movie }
-
-    it 'First actors must be Array' do
-      expect(subject.actors).to be_an(Array)
+    context 'when first actors must be Array' do
+      it { expect(movie.actors).to be_an(Array) }
     end
   end
 
   describe '#movie_price' do
-    subject { movie }
-
-    it 'First movie price' do
-      expect(subject.movie_price).to eq(3)
+    context 'when first movie price' do
+      it { expect(movie.movie_price).to eq(3) }
     end
   end
 end

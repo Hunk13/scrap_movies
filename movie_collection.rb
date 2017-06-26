@@ -1,4 +1,3 @@
-# Class MovieCollection
 class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
   SCRAP_FILE = 'movies.txt'.freeze
@@ -20,7 +19,7 @@ class MovieCollection
   end
 
   def filter(filter_field)
-    @movies.select { |x| x.matches?(filter_field) }
+    @movies.select { |mov| mov.matches?(filter_field) }
   end
 
   def stats(field)
@@ -43,7 +42,7 @@ class MovieCollection
 
   def parse_file(file_name)
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.create_movies(self, movie)
+      |movie| Movie.movie_data(self, movie)
     }
   end
 end

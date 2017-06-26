@@ -1,5 +1,5 @@
 describe Theatre do
-  subject(:collection) { described_class.new('movies.txt') }
+  subject(:collection) { described_class.new('spec/movies.txt') }
 
   describe '#show' do
     subject { collection.show(time) }
@@ -22,8 +22,8 @@ describe Theatre do
     subject { collection.when?(movie_name) }
 
     context 'when show movie' do
-      let(:movie_name) { 'Gone with the Wind' }
-      it { expect(subject).to eq(%w(Morning Evening)) }
+      let(:movie_name) { 'The Godfather' }
+      it { expect(subject).to eq(['Evening']) }
     end
   end
 end

@@ -1,8 +1,10 @@
 describe MovieCollection do
-  subject(:collection) { described_class.new('movies.txt') }
+  subject(:collection) { described_class.new('spec/movies.txt') }
 
   describe '#all' do
-    its(:all) { is_expected.to be_an(Array).and have_attributes(count: 250).and all be_a Movie }
+    its(:all) { is_expected.to be_an(Array)
+                           .and have_attributes(count: 50)
+                           .and all be_a Movie }
   end
 
   describe '#sort_by' do
@@ -12,6 +14,11 @@ describe MovieCollection do
 
   describe '#filter' do
     subject { collection.filter(movie_filter) }
+
+    context 'when empty filter' do
+      let(:movie_filter) { {} }
+      it { is_expected.to eq(collection.all) }
+    end
 
     context 'when movie title' do
       let(:movie_filter) { { title: 'The terminator' } }
@@ -48,6 +55,11 @@ describe MovieCollection do
                                               genre: 'Action', date: 1984,
                                               country: 'USA', title: 'The terminator',
                                               year: 2000, director: 'James Cameron' ) }
+    end
+
+    context 'when not correct data' do
+      let(:movie_filter) { { director: 'Fedor Bondarchuk' } }
+      it { is_expected.to all have_attributes(director: 'Fedor Bondarchuk') }
     end
   end
 

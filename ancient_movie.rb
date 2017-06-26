@@ -1,4 +1,3 @@
-# class AncientMovie
 class AncientMovie < Movie
   def to_s
     "#{@title} — old movie (#{@year} year)"

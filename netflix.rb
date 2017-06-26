@@ -1,4 +1,3 @@
-# class Netflix child from MovieCollection
 class Netflix < MovieCollection
   attr_reader :money
 
@@ -18,7 +17,7 @@ class Netflix < MovieCollection
   end
 
   def how_much?(input_movie_name)
-    mov = filter(title: input_movie_name).select { |movie| movie.rating * rand }.last
+    mov = filter(title: input_movie_name)[0]
     raise ArgumentError, "Movie '#{input_movie_name}' not found" if mov.nil?
     mov.movie_price
   end

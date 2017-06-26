@@ -1,4 +1,3 @@
-# Class NewMowie
 class NewMovie < Movie
   def to_s
     "#{@title} — new movie. Release: #{now_year - @year} years ago."
@@ -11,6 +10,6 @@ class NewMovie < Movie
   private
 
   def now_year
-    Time.now.strftime('%Y').to_i
+    Time.now.year
   end
 end

@@ -1,4 +1,3 @@
-# class Theatre child from MovieCollection
 class Theatre < MovieCollection
   PERIOD = {
              'Morning' => { year: 1900...1945 },
@@ -15,7 +14,8 @@ class Theatre < MovieCollection
   end
 
   def when?(movie_name)
-    movie = filter(title: movie_name).last
+    movie = filter(title: movie_name).first
+    raise ArgumentError, "Movie '#{movie_name}' not found" if movie.nil?
     PERIOD.select { |_key, value| filter(value).include? movie }.map(&:first)
   end
 end

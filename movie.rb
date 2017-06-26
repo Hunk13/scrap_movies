@@ -1,4 +1,3 @@
-# Class Movie. For object Movie
 class Movie
   attr_reader :link, :title, :year, :country, :date,
               :genre, :length, :rating, :director, :actors
@@ -17,7 +16,7 @@ class Movie
     @movie_collection = movie_collection
   end
 
-  def self.create_movies(movie_collection, movie)
+  def self.movie_data(movie_collection, movie)
     case movie[2].to_i
     when 1900...1945
       AncientMovie.new(movie_collection, movie)
