@@ -12,10 +12,13 @@ require_relative 'movie_collection'
 require_relative 'netflix'
 require_relative 'theatre'
 
-movie_theatre = Theatre.new('movies.txt')
-puts ''
-puts 'When movie'
-puts movie_theatre.when?('The Godfather')
+# movie_theatre = Theatre.new('movies.txt')
+# puts ''
+# puts 'When movie'
+# puts movie_theatre.when?('The Godfather')
+# puts ''
+# puts 'When movie not exist'
+# puts movie_theatre.when?('The Matrix')
 
 # movie_netflix = Netflix.new('movies.txt')
 # puts ''
@@ -47,10 +50,10 @@ puts movie_theatre.when?('The Godfather')
 # puts 'How much money after show movie'
 # puts movie_netflix.money
 
-# movies = MovieCollection.new
-# puts ''
-# puts 'All movies (cropped to 5 first)'
-# puts movies.all.first(5)
+movies = MovieCollection.new
+puts ''
+puts 'All movies (cropped to 5 first)'
+ap movies.all.first
 # puts ''
 # puts 'Price of first movie'
 # puts movies.all.first.movie_price
@@ -58,8 +61,8 @@ puts movie_theatre.when?('The Godfather')
 # puts 'Movies sort by field (cropped to 5 first)'
 # puts movies.sort_by(:genre).first(5)
 # puts ''
-# puts 'Movies filter by field (cropped to 5 first)'
-# puts movies.filter(director: 'Alan Wilder')
+# puts 'Movies filter by field'
+# puts movies.filter(director: 'Francis Ford Coppola')
 # puts ''
 # puts 'Movies statistics by field'
 # movies.stats_puts(movies.stats(:country))

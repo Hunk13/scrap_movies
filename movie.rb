@@ -29,12 +29,6 @@ class Movie
     end
   end
 
-  def matches?(params)
-    params.reduce(true) do |res, (key, value)|
-      res && matches_filter?(key, value)
-    end
-  end
-
   def matches_filter?(key, value)
     if send(key).is_a?(Array)
       if value.is_a?(Array)

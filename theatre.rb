@@ -14,7 +14,7 @@ class Theatre < MovieCollection
   end
 
   def when?(movie_name)
-    movie = filter(title: movie_name).first
+    movie = filter(title: movie_name)[0]
     raise ArgumentError, "Movie '#{movie_name}' not found" if movie.nil?
     PERIOD.select { |_key, value| filter(value).include? movie }.map(&:first)
   end

@@ -2,14 +2,16 @@ describe MovieCollection do
   subject(:collection) { described_class.new('spec/movies.txt') }
 
   describe '#all' do
-    its(:all) { is_expected.to be_an(Array)
-                           .and have_attributes(count: 50)
-                           .and all be_a Movie }
+    its(:all) { is_expected.to be_an(Array).and have_attributes(count: 50).and all be_a Movie }
   end
 
   describe '#sort_by' do
     subject { collection.sort_by(:length) }
-    it { is_expected.to eq(collection.all.sort_by(&:length)) }
+    MovieCollection::FIELDS.each do |field|
+      let(:length) { field }
+      context "when #{field}"
+      it { is_expected.to eq(collection.all.sort_by(&:length)) }
+    end
   end
 
   describe '#filter' do

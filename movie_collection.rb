@@ -15,11 +15,14 @@ class MovieCollection
   end
 
   def sort_by(sort_field)
+    check_field!(sort_field)
     @movies.sort_by(&sort_field)
   end
 
   def filter(filter_field)
-    @movies.select { |mov| mov.matches?(filter_field) }
+    filter_field.reduce(@movies) do |res, (key, value)|
+      res.select { |mov| mov.matches_filter?(key, value) }
+    end
   end
 
   def stats(field)
@@ -44,5 +47,10 @@ class MovieCollection
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
       |movie| Movie.movie_data(self, movie)
     }
+  end
+
+  def check_field!(*fields)
+    bad_fields = fields.select { |field| !FIELDS.include?(field) }
+    raise("Params: #{bad_fields} not exist") unless bad_fields.empty?
   end
 end
