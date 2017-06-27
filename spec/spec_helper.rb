@@ -16,3 +16,5 @@ require_relative '../new_movie'
 RSpec.configure do |config|
   config.fuubar_progress_bar_options = { format: 'My Fuubar! <%B> %p%% %a' }
 end
+
+RSpec::Matchers.define_negated_matcher :not_change, :change

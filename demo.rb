@@ -12,6 +12,19 @@ require_relative 'movie_collection'
 require_relative 'netflix'
 require_relative 'theatre'
 
+# movie_array_data = ['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
+#                     'The Shawshank Redemption',
+#                     '1994',
+#                     'USA',
+#                     '1994-10-14',
+#                     'Crime,Drama',
+#                     '142 min',
+#                     '9.3',
+#                     'Frank Darabont',
+#                     'Tim Robbins,Morgan Freeman,Bob Gunton']
+# md = Movie.movie_data(movie_array_data)
+# ap md
+
 # movie_theatre = Theatre.new('movies.txt')
 # puts ''
 # puts 'When movie'
@@ -51,18 +64,18 @@ require_relative 'theatre'
 # puts movie_netflix.money
 
 movies = MovieCollection.new
-puts ''
-puts 'All movies (cropped to 5 first)'
-ap movies.all.first
+# puts ''
+# puts 'All movies (cropped to 5 first)'
+# ap movies.all.first.class
 # puts ''
 # puts 'Price of first movie'
 # puts movies.all.first.movie_price
 # puts ''
 # puts 'Movies sort by field (cropped to 5 first)'
 # puts movies.sort_by(:genre).first(5)
-# puts ''
-# puts 'Movies filter by field'
-# puts movies.filter(director: 'Francis Ford Coppola')
+puts ''
+puts 'Movies filter by field'
+puts movies.filter(director: 'Frank Darabont')[0]
 # puts ''
 # puts 'Movies statistics by field'
 # movies.stats_puts(movies.stats(:country))

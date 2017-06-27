@@ -21,9 +21,19 @@ describe Theatre do
   describe '#when?' do
     subject { collection.when?(movie_name) }
 
-    context 'when show movie' do
+    context 'when show movie in Evening' do
       let(:movie_name) { 'The Godfather' }
       it { expect(subject).to eq(['Evening']) }
+    end
+
+    context 'when show movie in Afternoon' do
+      let(:movie_name) { 'Star Wars: Episode IV - A New Hope' }
+      it { expect(subject).to eq(['Afternoon']) }
+    end
+
+    context 'when show movie not found' do
+      let(:movie_name) { 'Star Wars: Episode IX - This is the End' }
+      it { expect { subject }.to raise_error(ArgumentError, "Movie 'Star Wars: Episode IX - This is the End' not found") }
     end
   end
 end

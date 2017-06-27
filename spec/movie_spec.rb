@@ -1,6 +1,19 @@
 describe Movie do
   subject(:collection) { MovieCollection.new('spec/movies.txt') }
-  subject(:movie) { collection.all.first }
+  subject(:movie) { collection.all[0] }
+
+  # subject(:movie_array_data) {
+  #    ['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
+  #     'The Shawshank Redemption',
+  #     '1994',
+  #     'USA',
+  #     '1994-10-14',
+  #     'Crime,Drama',
+  #     '142 min',
+  #     '9.3',
+  #     'Frank Darabont',
+  #     'Tim Robbins,Morgan Freeman,Bob Gunton']
+  #  }
 
   describe '#genre?' do
     subject { movie.genre?(genre) }

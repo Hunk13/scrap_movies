@@ -4,10 +4,10 @@ describe Netflix do
   describe '#show' do
     before { netflix.pay(money) }
     subject { netflix.show(title) }
+    let(:title) { { title: '12 Angry Men' } }
 
     context 'when enough money' do
       let(:money) { 10 }
-      let(:title) { { title: '12 Angry Men' } }
       it {
         expect { subject }
           .to output(/^Now showing: 12 Angry Men \d{2}:\d{2}:\d{2} - \d{2}:\d{2}:\d{2}/i)
@@ -18,11 +18,10 @@ describe Netflix do
 
     context 'when not enough money' do
       let(:money) { 1 }
-      let(:title) { { title: '12 Angry Men' } }
       it {
         expect { subject }
           .to raise_error(RuntimeError, 'Not enough money. This movie cost 1.5. Your balance 1')
-          .and change(netflix, :money).by(0)
+          .and not_change(netflix, :money).from(1)
       }
     end
 
@@ -32,7 +31,7 @@ describe Netflix do
       it {
         expect { subject }
           .to raise_error(RuntimeError, 'Film Not Found')
-          .and change(netflix, :money).by(0)
+          .and not_change(netflix, :money).from(10)
       }
     end
   end
@@ -42,7 +41,7 @@ describe Netflix do
 
     context 'when film found' do
       let(:movie_name) { '12 Angry Men' }
-      it { expect(subject).to be_a_kind_of(Numeric) }
+      it { expect(subject).to eq(1.5) }
     end
 
     context 'when film not found' do
