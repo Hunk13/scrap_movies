@@ -26,6 +26,7 @@ class MovieCollection
   end
 
   def stats(field)
+    check_field!(field)
     all.flat_map(&field).sort
   end
 
@@ -45,7 +46,7 @@ class MovieCollection
 
   def parse_file(file_name)
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.movie_data(self, movie)
+      |movie| Movie.movie_data(movie, self)
     }
   end
 

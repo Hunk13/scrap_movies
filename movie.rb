@@ -2,7 +2,7 @@ class Movie
   attr_reader :link, :title, :year, :country, :date,
               :genre, :length, :rating, :director, :actors
 
-  def initialize(movie_collection = nil, movie)
+  def initialize(movie, movie_collection = nil)
     @link     = movie[0]
     @title    = movie[1]
     @year     = movie[2].to_i
@@ -16,16 +16,16 @@ class Movie
     @movie_collection = movie_collection
   end
 
-  def self.movie_data(movie_collection = nil, movie)
+  def self.movie_data(movie, movie_collection = nil)
     case movie[2].to_i
     when 1900...1945
-      AncientMovie.new(movie_collection, movie)
+      AncientMovie.new(movie, movie_collection)
     when 1945...1968
-      ClassicMovie.new(movie_collection, movie)
+      ClassicMovie.new(movie, movie_collection)
     when 1968...2000
-      ModernMovie.new(movie_collection, movie)
+      ModernMovie.new(movie, movie_collection)
     else
-      NewMovie.new(movie_collection, movie)
+      NewMovie.new(movie, movie_collection)
     end
   end
 

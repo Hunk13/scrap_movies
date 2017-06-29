@@ -63,7 +63,7 @@ require_relative 'theatre'
 # puts 'How much money after show movie'
 # puts movie_netflix.money
 
-movies = MovieCollection.new
+# movies = MovieCollection.new
 # puts ''
 # puts 'All movies (cropped to 5 first)'
 # ap movies.all.first.class
@@ -73,12 +73,15 @@ movies = MovieCollection.new
 # puts ''
 # puts 'Movies sort by field (cropped to 5 first)'
 # puts movies.sort_by(:genre).first(5)
-puts ''
-puts 'Movies filter by field'
-puts movies.filter(director: 'Frank Darabont')[0]
+# puts ''
+# puts 'Movies filter by field'
+# puts movies.filter(director: 'Frank Darabont')
+# puts ''
+# puts 'Movies filter by field'
+# puts movies.filter(director: '')
 # puts ''
 # puts 'Movies statistics by field'
-# movies.stats_puts(movies.stats(:country))
+# ap movies.stats(:director)
 # puts ''
 # puts 'First movie'
 # puts movies.all.first

@@ -23,28 +23,33 @@ describe MovieCollection do
     end
 
     context 'when movie title' do
-      let(:movie_filter) { { title: 'The terminator' } }
-      it { is_expected.to all have_attributes(title: 'The terminator') }
+      let(:movie_filter) { { title: 'The Matrix' } }
+      it { is_expected.to all have_attributes(title: 'The Matrix') }
+      it { is_expected.to_not be_empty }
     end
 
     context 'when movie year' do
       let(:movie_filter) { { year: 2000 } }
       it { is_expected.to all have_attributes(year: 2000) }
+      it { is_expected.to_not be_empty }
     end
 
     context 'when movie country' do
       let(:movie_filter) { { country: 'USA' } }
       it { is_expected.to all have_attributes(country: 'USA') }
+      it { is_expected.to_not be_empty }
     end
 
     context 'when movie genre' do
-      let(:movie_filter) { { genre: include('Comedy') } }
+      let(:movie_filter) { { genre: 'Comedy' } }
       it { is_expected.to all have_attributes(genre: include('Comedy')) }
+      it { is_expected.to_not be_empty }
     end
 
     context 'when movie director' do
       let(:movie_filter) { { director: 'James Cameron' } }
       it { is_expected.to all have_attributes(director: 'James Cameron') }
+      it { is_expected.to_not be_empty }
     end
 
     context 'when all movie filters' do
@@ -62,21 +67,26 @@ describe MovieCollection do
     context 'when not correct data' do
       let(:movie_filter) { { director: 'Fedor Bondarchuk' } }
       it { is_expected.to all have_attributes(director: 'Fedor Bondarchuk') }
+      it { is_expected.to be_empty }
+    end
+
+    context 'when not correct field' do
+      let(:movie_filter) { { composer: 'Fedor Bondarchuk' } }
+      it { expect { subject }.to raise_error(NoMethodError) }
     end
   end
 
   describe '#stats' do
     subject { collection.stats(movie_stats) }
 
-    shared_examples 'stats' do
-      it { is_expected.to be_an(Array) }
+    context 'when filed not exist' do
+      let(:movie_stats) { :composer }
+      it { expect { subject }.to raise_error(RuntimeError) }
     end
 
-    MovieCollection::FIELDS.each do |field|
-      context "Movie when #{field}" do
-        let(:movie_stats) { field }
-        it_should_behave_like 'stats'
-      end
+    context 'when filed director' do
+      let(:movie_stats) { :director }
+      it { is_expected.to be_an(Array).and have_attributes(count: 50) }
     end
   end
 

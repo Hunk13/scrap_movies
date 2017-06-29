@@ -1,8 +1,8 @@
 describe Theatre do
-  subject(:collection) { described_class.new('spec/movies.txt') }
+  subject(:theatre) { described_class.new('spec/movies.txt') }
 
   describe '#show' do
-    subject { collection.show(time) }
+    subject { theatre.show(time) }
 
     context 'when exist period' do
       let(:time) { 'Morning' }
@@ -19,7 +19,7 @@ describe Theatre do
   end
 
   describe '#when?' do
-    subject { collection.when?(movie_name) }
+    subject { theatre.when?(movie_name) }
 
     context 'when show movie in Evening' do
       let(:movie_name) { 'The Godfather' }
