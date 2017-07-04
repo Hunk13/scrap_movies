@@ -1,3 +1,6 @@
+require 'CSV'
+require 'date'
+
 class Movie
   attr_reader :link, :title, :year, :country, :date,
               :genre, :length, :rating, :director, :actors
@@ -16,7 +19,7 @@ class Movie
     @movie_collection = movie_collection
   end
 
-  def self.movie_data(movie, movie_collection = nil)
+  def self.build(movie, movie_collection = nil)
     case movie[2].to_i
     when 1900...1945
       AncientMovie.new(movie, movie_collection)
@@ -30,14 +33,9 @@ class Movie
   end
 
   def matches_filter?(key, value)
-    if send(key).is_a?(Array)
-      if value.is_a?(Array)
-        send(key).any? { |v| value.include?(v) }
-      else
-        send(key).any? { |v| v == value }
-      end
-    else
-      value === send(key)
+    attr = Array(send(key))
+    Array(value).product(attr).any? do |filter_val, attr_val|
+      filter_val === attr_val
     end
   end
 

@@ -1,5 +1,17 @@
 describe Netflix do
   subject(:netflix) { described_class.new('spec/movies.txt') }
+  subject(:movie) {
+     ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
+                      'The Shawshank Redemption',
+                      '1994',
+                      'USA',
+                      '1994-10-14',
+                      'Crime,Drama',
+                      '142 min',
+                      '9.3',
+                      'Frank Darabont',
+                      'Tim Robbins,Morgan Freeman,Bob Gunton'], netflix)
+   }
 
   describe '#show' do
     before { netflix.pay(money) }
@@ -9,10 +21,13 @@ describe Netflix do
     context 'when enough money' do
       let(:money) { 10 }
       it {
+        @time_now = Time.parse('Jul 02 20017 18:22:22')
+        allow(Time).to receive(:now).and_return(@time_now)
+        allow(netflix).to receive(:select_movie).and_return(movie)
         expect { subject }
-          .to output(/^Now showing: 12 Angry Men \d{2}:\d{2}:\d{2} - \d{2}:\d{2}:\d{2}/i)
+          .to output('Now showing: The Shawshank Redemption 18:22:22 - 20:44:22')
           .to_stdout
-          .and change(netflix, :money).by(-1.5)
+          .and change(netflix, :money).by(-3)
       }
     end
 
@@ -54,11 +69,11 @@ describe Netflix do
 
   describe '#pay' do
     context 'when correct pay' do
-      it { expect { subject.pay(10) }.to change(netflix, :money).by(10) }
+      it { expect { netflix.pay(10) }.to change(netflix, :money).by(10) }
     end
 
     context 'when incorrect pay' do
-      it { expect { subject.pay(-5) }
+      it { expect { netflix.pay(-5) }
         .to raise_error(ArgumentError, 'Value -5 not correct')
       }
     end

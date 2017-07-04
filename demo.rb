@@ -22,16 +22,26 @@ require_relative 'theatre'
 #                     '9.3',
 #                     'Frank Darabont',
 #                     'Tim Robbins,Morgan Freeman,Bob Gunton']
-# md = Movie.movie_data(movie_array_data)
+# md = Movie.build(movie_array_data)
 # ap md
 
-# movie_theatre = Theatre.new('movies.txt')
+movie_theatre = Theatre.new('movies.txt')
 # puts ''
 # puts 'When movie'
 # puts movie_theatre.when?('The Godfather')
 # puts ''
 # puts 'When movie not exist'
-# puts movie_theatre.when?('The Matrix')
+# begin
+#   puts movie_theatre.when?('The Matrixxxx')
+# rescue ArgumentError => e
+#   puts e
+# end
+# puts ''
+# puts 'Show movie morning'
+# puts movie_theatre.show('Morning')
+puts ''
+puts 'Show movie morning'
+ap movie_theatre.select_movie('Morning').class
 
 # movie_netflix = Netflix.new('movies.txt')
 # puts ''

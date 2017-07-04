@@ -7,13 +7,13 @@ class Netflix < MovieCollection
   end
 
   def show(params)
-    mov = filter(params).sort_by { |movie| movie.rating * rand }.last
+    mov = select_movie(params)
     raise('Film Not Found') if filter(params).empty?
     raise("Not enough money. This movie cost #{mov.movie_price}. Your balance #{@money}") if @money < mov.movie_price
     start_time = Time.now
     end_time = start_time + mov.length * 60
     @money -= mov.movie_price
-    puts "Now showing: #{mov.title} #{start_time.strftime('%H:%M:%S')} - #{end_time.strftime('%H:%M:%S')}"
+    print "Now showing: #{mov.title} #{start_time.strftime('%H:%M:%S')} - #{end_time.strftime('%H:%M:%S')}"
   end
 
   def how_much?(input_movie_name)
@@ -25,5 +25,9 @@ class Netflix < MovieCollection
   def pay(money)
     raise ArgumentError, "Value #{money} not correct" if money < 0
     @money =+ money
+  end
+
+  def select_movie(params)
+    filter(params).sort_by { |movie| movie.rating * rand }.last
   end
 end

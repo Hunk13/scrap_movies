@@ -1,5 +1,4 @@
-require 'CSV'
-require 'date'
+require 'time'
 require 'rspec'
 require 'fuubar'
 require 'rspec/its'

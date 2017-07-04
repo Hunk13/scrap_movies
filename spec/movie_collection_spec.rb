@@ -5,15 +5,6 @@ describe MovieCollection do
     its(:all) { is_expected.to be_an(Array).and have_attributes(count: 50).and all be_a Movie }
   end
 
-  describe '#sort_by' do
-    subject { collection.sort_by(:length) }
-    MovieCollection::FIELDS.each do |field|
-      let(:length) { field }
-      context "when #{field}"
-      it { is_expected.to eq(collection.all.sort_by(&:length)) }
-    end
-  end
-
   describe '#filter' do
     subject { collection.filter(movie_filter) }
 
@@ -64,14 +55,8 @@ describe MovieCollection do
                                               year: 2000, director: 'James Cameron' ) }
     end
 
-    context 'when not correct data' do
-      let(:movie_filter) { { director: 'Fedor Bondarchuk' } }
-      it { is_expected.to all have_attributes(director: 'Fedor Bondarchuk') }
-      it { is_expected.to be_empty }
-    end
-
     context 'when not correct field' do
-      let(:movie_filter) { { composer: 'Fedor Bondarchuk' } }
+      let(:movie_filter) { { composer: 'Enio Moriccone' } }
       it { expect { subject }.to raise_error(NoMethodError) }
     end
   end

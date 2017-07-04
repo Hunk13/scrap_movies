@@ -1,3 +1,6 @@
+require 'CSV'
+require 'date'
+
 class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
   SCRAP_FILE = 'movies.txt'.freeze
@@ -46,7 +49,7 @@ class MovieCollection
 
   def parse_file(file_name)
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.movie_data(movie, self)
+      |movie| Movie.build(movie, self)
     }
   end
 
