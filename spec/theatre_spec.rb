@@ -1,6 +1,13 @@
 describe Theatre do
   subject(:theatre) { described_class.new('spec/movies.txt') }
-  subject(:movie) {
+
+  describe '#show' do
+    subject { theatre.show(time) }
+
+    context 'when exist period' do
+      let(:time) { 'Morning' }
+      let(:time_now) { Time.parse('18:22:22') }
+      let(:movie) {
      ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
                       'The Shawshank Redemption',
                       '1994',
@@ -13,15 +20,8 @@ describe Theatre do
                       'Tim Robbins,Morgan Freeman,Bob Gunton'], theatre)
    }
 
-  describe '#show' do
-    subject { theatre.show(time) }
-
-    context 'when exist period' do
-      let(:time) { 'Morning' }
-
       it {
-        @time_now = Time.parse('Jul 02 20017 18:22:22')
-        allow(Time).to receive(:now).and_return(@time_now)
+        allow(Time).to receive(:now).and_return(time_now)
         allow(theatre).to receive(:select_movie).and_return(movie)
         expect { subject }
           .to output('Now showing: The Shawshank Redemption 18:22:22 - 20:44:22')

@@ -21,7 +21,7 @@ describe Netflix do
     context 'when enough money' do
       let(:money) { 10 }
       it {
-        @time_now = Time.parse('Jul 02 20017 18:22:22')
+        @time_now = Time.parse('18:22:22')
         allow(Time).to receive(:now).and_return(@time_now)
         allow(netflix).to receive(:select_movie).and_return(movie)
         expect { subject }
@@ -68,13 +68,17 @@ describe Netflix do
   end
 
   describe '#pay' do
+    subject { netflix.pay(money) }
+
     context 'when correct pay' do
-      it { expect { netflix.pay(10) }.to change(netflix, :money).by(10) }
+      let(:money) { 10 }
+      it { expect { subject }.to change(netflix, :money).by(10) }
     end
 
     context 'when incorrect pay' do
-      it { expect { netflix.pay(-5) }
-        .to raise_error(ArgumentError, 'Value -5 not correct')
+      let(:money) { -10 }
+      it { expect { subject }
+        .to raise_error(ArgumentError, 'Value -10 not correct')
       }
     end
   end
