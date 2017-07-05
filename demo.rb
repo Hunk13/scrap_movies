@@ -25,7 +25,7 @@ require_relative 'theatre'
 # md = Movie.build(movie_array_data)
 # ap md
 
-movie_theatre = Theatre.new('movies.txt')
+# movie_theatre = Theatre.new('movies.txt')
 # puts ''
 # puts 'When movie'
 # puts movie_theatre.when?('The Godfather')
@@ -39,9 +39,9 @@ movie_theatre = Theatre.new('movies.txt')
 # puts ''
 # puts 'Show movie morning'
 # puts movie_theatre.show('Morning')
-puts ''
-puts 'Show movie morning'
-ap movie_theatre.select_movie('Morning').class
+# puts ''
+# puts 'Show movie morning'
+# ap movie_theatre.select_movie('Morning').class
 
 # movie_netflix = Netflix.new('movies.txt')
 # puts ''

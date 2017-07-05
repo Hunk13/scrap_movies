@@ -5,11 +5,13 @@ class Theatre < MovieCollection
              'Evening' => { genre: %w(Drama Horror) }
            }
 
-  def show(time)
-    raise("Films not showing in #{time}") if PERIOD[time].nil?
-    mov = select_movie(time)
-    start_time = Time.now
-    end_time = start_time + mov.length * 60
+  def initialize(collection)
+    super
+  end
+
+  def show(params)
+    raise("Films not showing in #{params}") if PERIOD[params].nil?
+    super
     print "Now showing: #{mov.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}"
   end
 

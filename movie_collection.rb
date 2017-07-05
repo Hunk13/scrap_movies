@@ -45,6 +45,12 @@ class MovieCollection
     genres.include?(genre)
   end
 
+  def show(params)
+    mov = select_movie(params)
+    start_time = Time.now
+    end_time = start_time + mov.length * 60
+  end
+
   private
 
   def parse_file(file_name)
