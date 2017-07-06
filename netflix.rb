@@ -24,6 +24,8 @@ class Netflix < MovieCollection
     @money =+ money
   end
 
+  private
+
   def select_movie(params)
     raise('Film Not Found') if filter(params).empty?
     filter(params).sort_by { |movie| movie.rating * rand }.last

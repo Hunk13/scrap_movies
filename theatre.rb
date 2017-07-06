@@ -16,6 +16,8 @@ class Theatre < MovieCollection
     PERIOD.select { |_key, value| filter(value).include? movie }.map(&:first)
   end
 
+  private
+
   def select_movie(time)
     raise("Films not showing in #{time}") if PERIOD[time].nil?
     filter(PERIOD[time]).sort_by { |movie| movie.rating * rand }.last

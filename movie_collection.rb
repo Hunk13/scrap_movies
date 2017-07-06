@@ -45,13 +45,13 @@ class MovieCollection
     genres.include?(genre)
   end
 
+  private
+
   def show_movie(movie)
     start_time = Time.now
     end_time = start_time + movie.length * 60
     print "Now showing: #{movie.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}"
   end
-
-  private
 
   def parse_file(file_name)
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
