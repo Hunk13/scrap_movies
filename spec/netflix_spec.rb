@@ -16,7 +16,7 @@ describe Netflix do
   describe '#show' do
     before { netflix.pay(money) }
     subject { netflix.show(title) }
-    let(:title) { { title: '12 Angry Men' } }
+    let(:title) { { title: 'The Shawshank Redemption' } }
 
     context 'when enough money' do
       let(:money) { 10 }
@@ -35,7 +35,7 @@ describe Netflix do
       let(:money) { 1 }
       it {
         expect { subject }
-          .to raise_error(RuntimeError, 'Not enough money. This movie cost 1.5. Your balance 1')
+          .to raise_error(RuntimeError, 'Not enough money. This movie cost 3. Your balance 1')
           .and not_change(netflix, :money).from(1)
       }
     end

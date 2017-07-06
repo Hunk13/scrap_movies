@@ -1,17 +1,16 @@
 class Netflix < MovieCollection
   attr_reader :money
 
-  def initialize(collection)
+  def initialize(file)
     super
     @money = 0
   end
 
   def show(params)
-    raise('Film Not Found') if filter(params).empty?
-    super
+    mov = select_movie(params)
     raise("Not enough money. This movie cost #{mov.movie_price}. Your balance #{@money}") if @money < mov.movie_price
+    show_movie(mov)
     @money -= mov.movie_price
-    print "Now showing: #{mov.title} #{start_time.strftime('%H:%M:%S')} - #{end_time.strftime('%H:%M:%S')}"
   end
 
   def how_much?(input_movie_name)
@@ -26,6 +25,7 @@ class Netflix < MovieCollection
   end
 
   def select_movie(params)
+    raise('Film Not Found') if filter(params).empty?
     filter(params).sort_by { |movie| movie.rating * rand }.last
   end
 end

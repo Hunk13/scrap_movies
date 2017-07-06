@@ -41,7 +41,10 @@ require_relative 'theatre'
 # puts movie_theatre.show('Morning')
 # puts ''
 # puts 'Show movie morning'
-# ap movie_theatre.select_movie('Morning').class
+# ap movie_theatre.show('Morning')
+# puts ''
+# puts 'Show movie nigth'
+# ap movie_theatre.show('Night')
 
 # movie_netflix = Netflix.new('movies.txt')
 # puts ''
@@ -74,6 +77,7 @@ require_relative 'theatre'
 # puts movie_netflix.money
 
 # movies = MovieCollection.new
+# puts movies.show(genre: 'Action')
 # puts ''
 # puts 'All movies (cropped to 5 first)'
 # ap movies.all.first.class

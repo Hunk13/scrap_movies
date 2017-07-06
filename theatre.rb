@@ -5,14 +5,9 @@ class Theatre < MovieCollection
              'Evening' => { genre: %w(Drama Horror) }
            }
 
-  def initialize(collection)
-    super
-  end
-
-  def show(params)
-    raise("Films not showing in #{params}") if PERIOD[params].nil?
-    super
-    print "Now showing: #{mov.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}"
+  def show(time)
+    mov = select_movie(time)
+    show_movie(mov)
   end
 
   def when?(movie_name)
@@ -22,6 +17,7 @@ class Theatre < MovieCollection
   end
 
   def select_movie(time)
+    raise("Films not showing in #{time}") if PERIOD[time].nil?
     filter(PERIOD[time]).sort_by { |movie| movie.rating * rand }.last
   end
 end
