@@ -1,7 +1,9 @@
-# Class MovieCollection
+require 'CSV'
+require 'date'
+
 class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
-  SCRAP_FILE = 'movies.txt'
+  SCRAP_FILE = 'movies.txt'.freeze
 
   attr_reader :genres
 
@@ -16,27 +18,24 @@ class MovieCollection
   end
 
   def sort_by(sort_field)
+    check_field!(sort_field)
     @movies.sort_by(&sort_field)
   end
 
   def filter(filter_field)
-    filter_field.reduce(all) do |field, (key, value)|
-      field.select do |f|
-        field = f.send(key)
-        if field.is_a?(Array)
-          field.grep(value).any?
-        else
-          value === field
-        end
-      end
+    filter_field.reduce(@movies) do |res, (key, value)|
+      res.select { |mov| mov.matches_filter?(key, value) }
     end
   end
 
   def stats(field)
-    all.flat_map(&field)
-       .each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
-       .sort
-       .each do |k, v|
+    check_field!(field)
+    all.flat_map(&field).sort
+  end
+
+  def stats_puts(field_array)
+    field_array.each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
+               .each do |k, v|
       puts "In #{k} include #{v} elements"
     end
   end
@@ -48,9 +47,20 @@ class MovieCollection
 
   private
 
+  def show_movie(movie)
+    start_time = Time.now
+    end_time = start_time + movie.length * 60
+    print "Now showing: #{movie.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}"
+  end
+
   def parse_file(file_name)
     CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-      |movie| Movie.new(self, movie)
+      |movie| Movie.build(movie, self)
     }
+  end
+
+  def check_field!(*fields)
+    bad_fields = fields.select { |field| !FIELDS.include?(field) }
+    raise("Params: #{bad_fields} not exist") unless bad_fields.empty?
   end
 end
