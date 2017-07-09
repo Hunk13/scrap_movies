@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-gem 'rspec'
-gem 'rspec-its'
-gem 'fuubar'
-gem 'pry'
+group :test do
+  gem 'fuubar'
+  gem 'pry'
+  gem 'rspec'
+  gem 'rspec-its'
+end
+
 gem 'awesome_print'
 gem 'colorize'
