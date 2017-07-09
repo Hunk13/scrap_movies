@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require 'date'
 require 'pry'
 require 'awesome_print'
