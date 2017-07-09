@@ -1,7 +1,6 @@
 require 'CSV'
 require 'date'
 require 'pry'
-require 'rspec'
 require 'awesome_print'
 require 'colorize'
 
