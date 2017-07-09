@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-group :test do
+group :test, :development do
   gem 'fuubar'
   gem 'pry'
   gem 'rspec'

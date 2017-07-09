@@ -1,3 +1,6 @@
+$LOAD_PATH.unshift(File.expand_path('../lib'))
+
+require 'csv'
 require 'time'
 require 'rspec'
 require 'fuubar'
