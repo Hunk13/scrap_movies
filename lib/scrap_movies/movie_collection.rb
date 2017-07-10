@@ -1,4 +1,6 @@
 class MovieCollection
+  include Enumerable
+
   FIELDS = %i(link title year country date genre length rating director actors).freeze
   SCRAP_FILE = 'movies.txt'.freeze
 
@@ -40,6 +42,10 @@ class MovieCollection
   def genre_exists?(genre)
     @genres ||= @movies.collect(&:genre)
     genres.include?(genre)
+  end
+
+  def each(&block)
+    @movies.each(&block)
   end
 
   private

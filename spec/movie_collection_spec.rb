@@ -88,4 +88,21 @@ describe MovieCollection do
       it { is_expected.to be_falsey }
     end
   end
+
+  describe 'test Enumerable module' do
+    context 'map' do
+      subject { collection.map(&:genre) }
+      it { is_expected.to be_a Array }
+    end
+
+    context 'select' do
+      subject { collection.select { |mov| (1968...2000) === mov.year }.first }
+      it { is_expected.to be_a ModernMovie }
+    end
+
+    context 'reject' do
+      subject { collection.reject { |mov| mov.length.even? }.count }
+      it { is_expected.to eq(27) }
+    end
+  end
 end

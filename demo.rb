@@ -115,3 +115,7 @@ end
 puts ''
 puts 'Return array of field?'.green
 puts one_movie.actors
+
+movies.map do |m|
+  puts m
+end
