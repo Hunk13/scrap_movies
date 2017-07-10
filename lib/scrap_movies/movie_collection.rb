@@ -1,6 +1,3 @@
-require 'CSV'
-require 'date'
-
 class MovieCollection
   FIELDS = %i(link title year country date genre length rating director actors).freeze
   SCRAP_FILE = 'movies.txt'.freeze

@@ -1,15 +1,12 @@
+$LOAD_PATH.unshift(File.expand_path('../lib'))
+
+require 'csv'
 require 'time'
 require 'rspec'
 require 'fuubar'
 require 'rspec/its'
-require_relative '../movie_collection'
-require_relative '../movie'
-require_relative '../netflix'
-require_relative '../theatre'
-require_relative '../ancient_movie'
-require_relative '../classic_movie'
-require_relative '../modern_movie'
-require_relative '../new_movie'
+
+require_relative '../lib/scrap_movies'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
