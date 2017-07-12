@@ -6,7 +6,7 @@ module CashDesk
   end
 
   def cash
-    @money
+    @money ||= 0
   end
 
   def take(who)

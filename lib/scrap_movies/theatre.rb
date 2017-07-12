@@ -2,10 +2,16 @@ class Theatre < MovieCollection
   include CashDesk
 
   PERIOD = {
-             'Morning' => { year: 1900...1945 },
-             'Afternoon' => { genre: %w(Comedy Adventure) },
-             'Evening' => { genre: %w(Drama Horror) }
-           }
+    'Morning' => { year: 1900...1945 },
+    'Afternoon' => { genre: %w(Comedy Adventure) },
+    'Evening' => { genre: %w(Drama Horror) }
+  }.freeze
+
+  PRICES = {
+    at_morning: 3,
+    at_day: 5,
+    at_evening: 10
+  }.freeze
 
   def show(time)
     mov = select_movie(time)
