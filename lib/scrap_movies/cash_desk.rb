@@ -9,6 +9,12 @@ module CashDesk
     @money ||= 0
   end
 
+  def pay_money(amount)
+    @money ||= 0
+    @money += amount
+  end
+
+
   def take(who)
     if who == 'Bank'
       puts 'Collection is made'
@@ -19,10 +25,6 @@ module CashDesk
   end
 
   private
-
-  def pay_money(amount)
-    @money += amount
-  end
 
   def reset_cashbox(amount = 0)
     @money = amount

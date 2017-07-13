@@ -25,8 +25,7 @@ class Theatre < MovieCollection
   end
 
   def buy_ticket(day_period)
-    fill(PERIODS[day_period][:price])
-    movie = choose_movie(PERIODS[day_period])
+    movie = choose_movie(PERIOD[day_period])
     if movie.nil?
       'No movie selected'
     else
@@ -39,5 +38,9 @@ class Theatre < MovieCollection
   def select_movie(time)
     raise("Films not showing in #{time}") if PERIOD[time].nil?
     filter(PERIOD[time]).sort_by { |movie| movie.rating * rand }.last
+  end
+
+  def choose_movie(movies)
+    movies.sort_by { |movie| movie.rating * rand }.last
   end
 end
