@@ -4,15 +4,18 @@ module ScrapMovie
     let(:dummy) { test_class.new }
 
     describe '#take' do
+      subject { dummy.take(subj) }
       before(:each) { dummy.pay_money(100) }
 
-      it 'set amount of money to zero if it is called by bank' do
-        expect { dummy.take('Bank') }.to change { dummy.cash }.from(100).to(0)
-        expect(dummy.take('Bank')).to eq(0)
+      context 'set amount of money to zero if it is called by bank' do
+        let(:subj) { 'Bank' }
+        it { expect { subject }.to change { dummy.cash }.from(100).to(0) }
+        it { is_expected.to eq(0) }
       end
 
-      it 'raises error in other case' do
-        expect { dummy.take('Gop-Stop') }.to raise_error("The police'll be here soon!!!")
+      context 'raises error in other case' do
+        let(:subj) { 'Gop-Stop' }
+        it { expect { subject }.to raise_error("The police'll be here soon!!!") }
       end
     end
 
