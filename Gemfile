@@ -10,3 +10,4 @@ end
 
 gem 'awesome_print'
 gem 'colorize'
+gem 'money'

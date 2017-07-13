@@ -1,10 +1,10 @@
 class Netflix < MovieCollection
-  include CashDesk
+  extend CashDesk
   attr_reader :money
 
   def initialize(file)
     super
-    @money = 0
+    @money ||= 0
   end
 
   def show(params)
@@ -22,7 +22,7 @@ class Netflix < MovieCollection
 
   def pay(money)
     raise ArgumentError, "Value #{money} not correct" if money < 0
-    pay_money(money)
+    Netflix.pay_money(money)
   end
 
   private

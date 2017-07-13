@@ -14,7 +14,6 @@ module CashDesk
     @money += amount
   end
 
-
   def take(who)
     if who == 'Bank'
       puts 'Collection is made'
