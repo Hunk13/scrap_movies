@@ -1,6 +1,10 @@
 class Theatre < MovieCollection
   include CashDesk
 
+  def initialize(file)
+    super
+  end
+
   PERIOD = {
     'Morning' => { year: 1900...1945 },
     'Afternoon' => { genre: %w(Comedy Adventure) },
@@ -47,6 +51,6 @@ class Theatre < MovieCollection
   end
 
   def find_period(time)
-    TIME_PERIODS.select { |_key, value| value === Time.parse(time) }.keys.first
+    TIME_PERIODS.select { |_key, value| Time.parse(time).include? value }.keys.first
   end
 end

@@ -96,7 +96,7 @@ describe MovieCollection do
     end
 
     context 'select' do
-      subject { collection.select { |mov| (1968...2000) === mov.year }.first }
+      subject { collection.select { |mov| (1968...2000).cover? mov.year }.first }
       it { is_expected.to be_a ModernMovie }
     end
 
