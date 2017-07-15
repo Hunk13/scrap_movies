@@ -66,4 +66,8 @@ class MovieCollection
     bad_fields = fields.select { |field| !FIELDS.include?(field) }
     raise("Params: #{bad_fields} not exist") unless bad_fields.empty?
   end
+
+  def choice(movies)
+    movies.sort_by { |movie| movie.rating * rand }.last
+  end
 end
