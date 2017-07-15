@@ -4,7 +4,7 @@ class NewMovie < Movie
   end
 
   def movie_price
-    5
+    Money.new(500)
   end
 
   private

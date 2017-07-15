@@ -4,6 +4,6 @@ class AncientMovie < Movie
   end
 
   def movie_price
-    1
+    Money.new(100)
   end
 end

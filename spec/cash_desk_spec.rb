@@ -9,8 +9,7 @@ module ScrapMovie
 
       context 'set amount of money to zero if it is called by bank' do
         let(:inkass) { 'Bank' }
-        it { expect { subject }.to change { dummy.cash }.from(100).to(0) }
-        it { is_expected.to eq(0) }
+        it { expect { subject }.to change { dummy.cash }.from('$100.00').to('$0.00') }
       end
 
       context 'raises error in other case' do
@@ -22,7 +21,7 @@ module ScrapMovie
     describe '#cash' do
       subject { dummy.cash }
       it 'returns zero money' do
-        is_expected.to eq(0)
+        is_expected.to eq('$0.00')
       end
     end
 
@@ -30,7 +29,7 @@ module ScrapMovie
       subject { dummy.pay_money(50) }
 
       it 'moves sum of money to cashbox' do
-        expect { subject }.to change { dummy.cash }.from(0).to(50)
+        expect { subject }.to change { dummy.cash }.from('$0.00').to('$50.00')
       end
     end
   end

@@ -41,7 +41,7 @@ describe Movie do
 
   describe '#movie_price' do
     context 'when first movie price' do
-      it { expect(movie.movie_price).to eq(3) }
+      it { expect(movie.movie_price).to eq(Money.new(300)) }
     end
   end
 end

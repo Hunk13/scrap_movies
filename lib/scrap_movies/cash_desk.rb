@@ -6,26 +6,17 @@ module CashDesk
   end
 
   def cash
-    @money ||= 0
+    (@money ||= Money.new(0)).format
   end
 
   def pay_money(amount)
-    @money ||= 0
-    @money += amount
+    cash
+    @money += Money.new(amount * 100)
   end
 
   def take(who)
-    if who == 'Bank'
-      puts 'Collection is made'
-      @money = 0
-    else
-      raise Unauthorized
-    end
-  end
-
-  private
-
-  def reset_cashbox(amount = 0)
-    @money = amount
+    raise Unauthorized, "The police'll be here soon!!!" unless who == 'Bank'
+    @money = Money.new(0)
+    puts 'Collection is made'
   end
 end

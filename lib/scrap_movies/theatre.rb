@@ -7,10 +7,16 @@ class Theatre < MovieCollection
     'Evening' => { genre: %w(Drama Horror) }
   }.freeze
 
+  TIME_PERIODS = {
+    morning: Time.parse('05:00')..Time.parse('10:59'),
+    day: Time.parse('11:00')..Time.parse('16:59'),
+    evening: Time.parse('17:00')..Time.parse('23:59')
+  }.freeze
+
   PRICES = {
-    at_morning: 3,
-    at_day: 5,
-    at_evening: 10
+    at_morning: Money.new(300),
+    at_day: Money.new(500),
+    at_evening: Money.new(1000)
   }.freeze
 
   def show(time)
@@ -24,8 +30,8 @@ class Theatre < MovieCollection
     PERIOD.select { |_key, value| filter(value).include? movie }.map(&:first)
   end
 
-  def buy_ticket(day_period)
-    movie = choose_movie(PERIOD[day_period])
+  def buy_ticket(time)
+    movie = find_period(time)
     if movie.nil?
       'No movie selected'
     else
@@ -40,7 +46,7 @@ class Theatre < MovieCollection
     filter(PERIOD[time]).sort_by { |movie| movie.rating * rand }.last
   end
 
-  def choose_movie(movies)
-    movies.sort_by { |movie| movie.rating * rand }.last
+  def find_period(time)
+    TIME_PERIODS.select { |_key, value| value === Time.parse(time) }.keys.first
   end
 end
