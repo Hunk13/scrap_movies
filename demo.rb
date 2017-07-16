@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require 'date'
 require 'pry'
 require 'rspec'
@@ -20,6 +20,7 @@ movie_array_data = ['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
 md = Movie.build(movie_array_data)
 ap md
 
+puts '================ test Theatre Class =================='
 movie_theatre = Theatre.new('movies.txt')
 puts ''
 puts 'When showing movie "The Godfather"'.green
@@ -41,7 +42,11 @@ begin
 rescue RuntimeError => e
   puts e
 end
+puts ''
+puts 'Buy one ticket'.green
+puts movie_theatre.buy_ticket('20:00')
 
+puts '================ test Netflix Class =================='
 movie_netflix = Netflix.new('movies.txt')
 puts ''
 puts 'Error if not enough money'.green
@@ -75,7 +80,18 @@ end
 puts ''
 puts 'How much money after show movie'.green
 puts movie_netflix.money
+puts 'How much is in cashbox?'.green
+puts Netflix.cash
+puts 'Get money from bank'.green
+puts Netflix.take('Bank')
+puts 'Get money to Criminal'.green
+begin
+  puts Netflix.take('Criminal')
+rescue CashDesk::Unauthorized => e
+  puts e
+end
 
+puts '================ test MovieCollection Class =================='
 movies = MovieCollection.new('movies.txt')
 one_movie = movies.all.first
 puts ''
@@ -91,7 +107,7 @@ puts ''
 puts 'Movies filter by field'.green
 puts movies.filter(director: 'Frank Darabont')
 puts ''
-puts 'Movies filter by field'.green
+puts 'Movies filter by empty field'.green
 puts movies.filter(director: '')
 puts ''
 puts 'Movies statistics by field'.green
@@ -113,7 +129,7 @@ rescue RuntimeError => e
   puts e
 end
 puts ''
-puts 'Return array of field?'.green
+puts 'Return array of field'.green
 puts one_movie.actors
 
 movies.map do |m|

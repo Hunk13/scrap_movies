@@ -20,16 +20,16 @@ module ScrapMovie
 
     describe '#cash' do
       subject { dummy.cash }
-      it 'returns zero money' do
-        is_expected.to eq('$0.00')
+      context 'returns zero money' do
+        it { is_expected.to eq('$0.00') }
       end
     end
 
     describe '#pay_money' do
       subject { dummy.pay_money(50) }
 
-      it 'moves sum of money to cashbox' do
-        expect { subject }.to change { dummy.cash }.from('$0.00').to('$50.00')
+      context 'moves sum of money to cashbox' do
+        it { expect { subject }.to change { dummy.cash }.from('$0.00').to('$50.00') }
       end
     end
   end

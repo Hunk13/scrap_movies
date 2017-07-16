@@ -38,9 +38,9 @@ class Theatre < MovieCollection
     period = find_period(time)
     raise ArgumentError, 'The Cinema is closed' if period.nil?
 
-    movie = choice(@movies.filter(PERIOD[period]))
+    movie = choice(filter(PERIOD[period]))
     pay_money(PRICES[period])
-    "You have paid ticket on movie #{movie.name}"
+    "You have paid ticket on movie #{movie.title}"
   end
 
   private
@@ -51,6 +51,6 @@ class Theatre < MovieCollection
   end
 
   def find_period(time)
-    TIME_PERIODS.select { |_key, value| Time.parse(time).include? value }.keys.first
+    TIME_PERIODS.select { |_key, value| value === Time.parse(time)  }.keys.first
   end
 end

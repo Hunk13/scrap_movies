@@ -1,5 +1,6 @@
 require 'csv'
 require 'date'
+require 'time'
 require 'pry'
 require 'awesome_print'
 require 'colorize'
