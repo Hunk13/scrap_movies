@@ -1,8 +1,8 @@
-describe MovieCollection do
+describe ScrapMovies::MovieCollection do
   subject(:collection) { described_class.new('spec/movies.txt') }
 
   describe '#all' do
-    its(:all) { is_expected.to be_an(Array).and have_attributes(count: 50).and all be_a Movie }
+    its(:all) { is_expected.to be_an(Array).and have_attributes(count: 50).and all be_a ScrapMovies::Movie }
   end
 
   describe '#filter' do
@@ -97,7 +97,7 @@ describe MovieCollection do
 
     context 'select' do
       subject { collection.select { |mov| (1968...2000).cover? mov.year }.first }
-      it { is_expected.to be_a ModernMovie }
+      it { is_expected.to be_a ScrapMovies::ModernMovie }
     end
 
     context 'reject' do

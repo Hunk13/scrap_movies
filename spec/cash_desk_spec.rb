@@ -1,6 +1,6 @@
 module ScrapMovie
-  describe CashDesk do
-    let(:test_class) { Class.new { include CashDesk } }
+  describe ScrapMovies::CashDesk do
+    let(:test_class) { Class.new { include ScrapMovies::CashDesk } }
     let(:dummy) { test_class.new }
 
     describe '#take' do

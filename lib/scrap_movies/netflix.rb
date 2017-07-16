@@ -1,35 +1,37 @@
-class Netflix < MovieCollection
-  extend CashDesk
-  attr_reader :money
+module ScrapMovies
+  class Netflix < MovieCollection
+    extend CashDesk
+    attr_reader :money
 
-  def initialize(file)
-    super
-    @money ||= Money.new(0)
-  end
+    def initialize(file)
+      super
+      @money ||= Money.new(0)
+    end
 
-  def show(params)
-    mov = select_movie(params)
-    raise("Not enough money. This movie cost #{mov.movie_price}. Your balance #{@money}") if @money < mov.movie_price
-    show_movie(mov)
-    @money -= mov.movie_price
-  end
+    def show(params)
+      mov = select_movie(params)
+      raise("Not enough money. This movie cost #{mov.movie_price}. Your balance #{@money}") if @money < mov.movie_price
+      show_movie(mov)
+      @money -= mov.movie_price
+    end
 
-  def how_much?(input_movie_name)
-    mov = filter(title: input_movie_name)[0]
-    raise ArgumentError, "Movie '#{input_movie_name}' not found" if mov.nil?
-    mov.movie_price.format
-  end
+    def how_much?(input_movie_name)
+      mov = filter(title: input_movie_name)[0]
+      raise ArgumentError, "Movie '#{input_movie_name}' not found" if mov.nil?
+      mov.movie_price.format
+    end
 
-  def pay(money)
-    raise ArgumentError, "Value #{money} not correct" if money < 0
-    @money += Money.new(money * 100)
-    Netflix.pay_money(money)
-  end
+    def pay(money)
+      raise ArgumentError, "Value #{money} not correct" if money < 0
+      @money += Money.new(money * 100)
+      Netflix.pay_money(money)
+    end
 
-  private
+    private
 
-  def select_movie(params)
-    raise('Film Not Found') if filter(params).empty?
-    filter(params).sort_by { |movie| movie.rating * rand }.last
+    def select_movie(params)
+      raise('Film Not Found') if filter(params).empty?
+      filter(params).sort_by { |movie| movie.rating * rand }.last
+    end
   end
 end

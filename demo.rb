@@ -17,11 +17,11 @@ movie_array_data = ['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
                     '9.3',
                     'Frank Darabont',
                     'Tim Robbins,Morgan Freeman,Bob Gunton']
-md = Movie.build(movie_array_data)
+md = ScrapMovies::Movie.build(movie_array_data)
 ap md
 
 puts '================ test Theatre Class =================='
-movie_theatre = Theatre.new('movies.txt')
+movie_theatre = ScrapMovies::Theatre.new('movies.txt')
 puts ''
 puts 'When showing movie "The Godfather"'.green
 puts movie_theatre.when?('The Godfather')
@@ -47,7 +47,7 @@ puts 'Buy one ticket'.green
 puts movie_theatre.buy_ticket('20:00')
 
 puts '================ test Netflix Class =================='
-movie_netflix = Netflix.new('movies.txt')
+movie_netflix = ScrapMovies::Netflix.new('movies.txt')
 puts ''
 puts 'Error if not enough money'.green
 begin
@@ -81,18 +81,18 @@ puts ''
 puts 'How much money after show movie'.green
 puts movie_netflix.money
 puts 'How much is in cashbox?'.green
-puts Netflix.cash
+puts ScrapMovies::Netflix.cash
 puts 'Get money from bank'.green
-puts Netflix.take('Bank')
+puts ScrapMovies::Netflix.take('Bank')
 puts 'Get money to Criminal'.green
 begin
-  puts Netflix.take('Criminal')
-rescue CashDesk::Unauthorized => e
+  puts ScrapMovies::Netflix.take('Criminal')
+rescue ScrapMovies::CashDesk::Unauthorized => e
   puts e
 end
 
 puts '================ test MovieCollection Class =================='
-movies = MovieCollection.new('movies.txt')
+movies = ScrapMovies::MovieCollection.new('movies.txt')
 one_movie = movies.all.first
 puts ''
 puts 'First movie class'.green

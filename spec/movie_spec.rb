@@ -1,18 +1,18 @@
-describe Movie do
-  subject(:collection) { MovieCollection.new('spec/movies.txt') }
+describe ScrapMovies::Movie do
+  subject(:collection) { ScrapMovies::MovieCollection.new('spec/movies.txt') }
 
   subject(:movie) {
-     ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
-                      'The Shawshank Redemption',
-                      '1994',
-                      'USA',
-                      '1994-10-14',
-                      'Crime,Drama',
-                      '142 min',
-                      '9.3',
-                      'Frank Darabont',
-                      'Tim Robbins,Morgan Freeman,Bob Gunton'], collection)
-   }
+     ScrapMovies::ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
+                                   'The Shawshank Redemption',
+                                   '1994',
+                                   'USA',
+                                   '1994-10-14',
+                                   'Crime,Drama',
+                                   '142 min',
+                                   '9.3',
+                                   'Frank Darabont',
+                                   'Tim Robbins,Morgan Freeman,Bob Gunton'], collection)
+                  }
 
   describe '#genre?' do
     subject { movie.genre?(genre) }
