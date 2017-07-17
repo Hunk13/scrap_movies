@@ -5,6 +5,8 @@ gem 'awesome_print'
 gem 'colorize'
 gem 'money'
 
+gem 'rubocop', require: false
+
 group :test, :development do
   gem 'fuubar'
   gem 'pry'
