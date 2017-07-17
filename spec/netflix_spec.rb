@@ -1,17 +1,17 @@
-describe Netflix do
+describe ScrapMovies::Netflix do
   subject(:netflix) { described_class.new('spec/movies.txt') }
   subject(:movie) {
-     ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
-                      'The Shawshank Redemption',
-                      '1994',
-                      'USA',
-                      '1994-10-14',
-                      'Crime,Drama',
-                      '142 min',
-                      '9.3',
-                      'Frank Darabont',
-                      'Tim Robbins,Morgan Freeman,Bob Gunton'], netflix)
-   }
+                   ScrapMovies::ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
+                                                 'The Shawshank Redemption',
+                                                 '1994',
+                                                 'USA',
+                                                 '1994-10-14',
+                                                 'Crime,Drama',
+                                                 '142 min',
+                                                 '9.3',
+                                                 'Frank Darabont',
+                                                 'Tim Robbins,Morgan Freeman,Bob Gunton'], netflix)
+                 }
 
   describe '#show' do
     before { netflix.pay(money) }
@@ -27,7 +27,7 @@ describe Netflix do
         expect { subject }
           .to output('Now showing: The Shawshank Redemption 18:22:22 - 20:44:22')
           .to_stdout
-          .and change(netflix, :money).by(-3)
+          .and change(netflix, :money).by(-Money.new(300))
       }
     end
 
@@ -35,8 +35,8 @@ describe Netflix do
       let(:money) { 1 }
       it {
         expect { subject }
-          .to raise_error(RuntimeError, 'Not enough money. This movie cost 3. Your balance 1')
-          .and not_change(netflix, :money).from(1)
+          .to raise_error(RuntimeError, 'Not enough money. This movie cost 3.00. Your balance 1.00')
+          .and not_change(netflix, :money).from(Money.new(100))
       }
     end
 
@@ -46,7 +46,7 @@ describe Netflix do
       it {
         expect { subject }
           .to raise_error(RuntimeError, 'Film Not Found')
-          .and not_change(netflix, :money).from(10)
+          .and not_change(netflix, :money).from(Money.new(1000))
       }
     end
   end
@@ -56,7 +56,7 @@ describe Netflix do
 
     context 'when film found' do
       let(:movie_name) { '12 Angry Men' }
-      it { expect(subject).to eq(1.5) }
+      it { expect(subject).to eq("$1.50") }
     end
 
     context 'when film not found' do
@@ -72,7 +72,7 @@ describe Netflix do
 
     context 'when correct pay' do
       let(:money) { 10 }
-      it { expect { subject }.to change(netflix, :money).by(10) }
+      it { expect { subject }.to change(netflix, :money).by(Money.new(1000)) }
     end
 
     context 'when incorrect pay' do

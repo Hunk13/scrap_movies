@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require 'date'
 require 'pry'
 require 'rspec'
@@ -17,10 +17,11 @@ movie_array_data = ['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
                     '9.3',
                     'Frank Darabont',
                     'Tim Robbins,Morgan Freeman,Bob Gunton']
-md = Movie.build(movie_array_data)
+md = ScrapMovies::Movie.build(movie_array_data)
 ap md
 
-movie_theatre = Theatre.new('movies.txt')
+puts '================ test Theatre Class =================='
+movie_theatre = ScrapMovies::Theatre.new('movies.txt')
 puts ''
 puts 'When showing movie "The Godfather"'.green
 puts movie_theatre.when?('The Godfather')
@@ -41,8 +42,12 @@ begin
 rescue RuntimeError => e
   puts e
 end
+puts ''
+puts 'Buy one ticket'.green
+puts movie_theatre.buy_ticket('20:00')
 
-movie_netflix = Netflix.new('movies.txt')
+puts '================ test Netflix Class =================='
+movie_netflix = ScrapMovies::Netflix.new('movies.txt')
 puts ''
 puts 'Error if not enough money'.green
 begin
@@ -75,8 +80,19 @@ end
 puts ''
 puts 'How much money after show movie'.green
 puts movie_netflix.money
+puts 'How much is in cashbox?'.green
+puts ScrapMovies::Netflix.cash
+puts 'Get money from bank'.green
+puts ScrapMovies::Netflix.take('Bank')
+puts 'Get money to Criminal'.green
+begin
+  puts ScrapMovies::Netflix.take('Criminal')
+rescue ScrapMovies::CashDesk::Unauthorized => e
+  puts e
+end
 
-movies = MovieCollection.new('movies.txt')
+puts '================ test MovieCollection Class =================='
+movies = ScrapMovies::MovieCollection.new('movies.txt')
 one_movie = movies.all.first
 puts ''
 puts 'First movie class'.green
@@ -91,7 +107,7 @@ puts ''
 puts 'Movies filter by field'.green
 puts movies.filter(director: 'Frank Darabont')
 puts ''
-puts 'Movies filter by field'.green
+puts 'Movies filter by empty field'.green
 puts movies.filter(director: '')
 puts ''
 puts 'Movies statistics by field'.green
@@ -113,5 +129,9 @@ rescue RuntimeError => e
   puts e
 end
 puts ''
-puts 'Return array of field?'.green
+puts 'Return array of field'.green
 puts one_movie.actors
+
+movies.map do |m|
+  puts m
+end

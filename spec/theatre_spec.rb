@@ -1,4 +1,4 @@
-describe Theatre do
+describe ScrapMovies::Theatre do
   subject(:theatre) { described_class.new('spec/movies.txt') }
 
   describe '#show' do
@@ -8,17 +8,17 @@ describe Theatre do
       let(:time) { 'Morning' }
       let(:time_now) { Time.parse('18:22:22') }
       let(:movie) {
-     ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
-                      'The Shawshank Redemption',
-                      '1994',
-                      'USA',
-                      '1994-10-14',
-                      'Crime,Drama',
-                      '142 min',
-                      '9.3',
-                      'Frank Darabont',
-                      'Tim Robbins,Morgan Freeman,Bob Gunton'], theatre)
-   }
+                    ScrapMovies::ModernMovie.new(['http://imdb.com/title/tt0111161/?ref_=chttp_tt_1',
+                                                  'The Shawshank Redemption',
+                                                  '1994',
+                                                  'USA',
+                                                  '1994-10-14',
+                                                  'Crime,Drama',
+                                                  '142 min',
+                                                  '9.3',
+                                                  'Frank Darabont',
+                                                  'Tim Robbins,Morgan Freeman,Bob Gunton'], theatre)
+                  }
 
       it {
         allow(Time).to receive(:now).and_return(time_now)
