@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScrapMovies
   class Theatre < MovieCollection
     include CashDesk
@@ -8,8 +10,8 @@ module ScrapMovies
 
     PERIOD = {
       'Morning' => { year: 1900...1945 },
-      'Afternoon' => { genre: %w(Comedy Adventure) },
-      'Evening' => { genre: %w(Drama Horror) }
+      'Afternoon' => { genre: %w[Comedy Adventure] },
+      'Evening' => { genre: %w[Drama Horror] }
     }.freeze
 
     TIME_PERIODS = {
@@ -52,7 +54,7 @@ module ScrapMovies
     end
 
     def find_period(time)
-      TIME_PERIODS.select { |_key, value| value === Time.parse(time)  }.keys.first
+      TIME_PERIODS.select { |_key, value| value === Time.parse(time) }.keys.first
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScrapMovies
   class NewMovie < Movie
     def to_s

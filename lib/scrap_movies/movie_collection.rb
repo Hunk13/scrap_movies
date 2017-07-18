@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module ScrapMovies
   class MovieCollection
     include Enumerable
 
-    FIELDS = %i(link title year country date genre length rating director actors).freeze
-    SCRAP_FILE = 'movies.txt'.freeze
+    FIELDS = %i[link title year country date genre length rating director actors].freeze
+    SCRAP_FILE = 'movies.txt'
 
     attr_reader :genres
 
@@ -58,9 +60,7 @@ module ScrapMovies
     end
 
     def parse_file(file_name)
-      CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-        |movie| Movie.build(movie, self)
-      }
+      CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map { |movie| Movie.build(movie, self) }
     end
 
     def check_field!(*fields)

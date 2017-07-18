@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScrapMovies
   class Movie
     attr_reader :link, :title, :year, :country, :date,

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScrapMovies
   class Netflix < MovieCollection
     extend CashDesk
@@ -22,7 +24,7 @@ module ScrapMovies
     end
 
     def pay(money)
-      raise ArgumentError, "Value #{money} not correct" if money < 0
+      raise ArgumentError, "Value #{money} not correct" if money.negative?
       @money += Money.new(money * 100)
       Netflix.pay_money(money)
     end
