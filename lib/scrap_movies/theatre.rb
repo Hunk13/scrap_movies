@@ -54,7 +54,7 @@ module ScrapMovies
     end
 
     def find_period(time)
-      TIME_PERIODS.select { |_key, value| value === Time.parse(time) }.keys.first
+      TIME_PERIODS.select { |_key, value| value.include?(Time.parse(time)) }.keys.first
     end
   end
 end

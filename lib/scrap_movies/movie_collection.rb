@@ -56,7 +56,7 @@ module ScrapMovies
     def show_movie(movie)
       start_time = Time.now
       end_time = start_time + movie.length * 60
-      print "Now showing: #{movie.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}"
+      print "Now showing: #{movie.title} #{start_time.strftime('%H:%M:%S')} - #{end_time.strftime('%H:%M:%S')}"
     end
 
     def parse_file(file_name)
@@ -64,7 +64,7 @@ module ScrapMovies
     end
 
     def check_field!(*fields)
-      bad_fields = fields.select { |field| !FIELDS.include?(field) }
+      bad_fields = fields.reject { |field| FIELDS.include?(field) }
       raise("Params: #{bad_fields} not exist") unless bad_fields.empty?
     end
 

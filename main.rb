@@ -36,7 +36,7 @@ puts array_of_movies.map { |movie| movie.director.split(' ').reverse.join(' ') }
 
 puts ''
 puts 'Number of films not in the USA:'
-puts array_of_movies.count { |movie| movie.country != 'USA' }
+puts(array_of_movies.count { |movie| movie.country != 'USA' })
 
 puts ''
 puts 'Show statistic from month:'
