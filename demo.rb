@@ -67,10 +67,15 @@ begin
 rescue ArgumentError => e
   puts e
 end
-movie_netflix.pay(5)
+movie_netflix.pay(50)
 puts ''
 puts 'Show one movie, money is enough'.green
 puts movie_netflix.show(title: 'The Terminator')
+puts ''
+puts 'Show one movie, money is enough and a lot of params'.red
+puts(movie_netflix.show do |movie|
+  !movie.title.include?('Terminator') && movie.genre.include?('Action') && movie.year > 2003
+end)
 puts ''
 puts 'Show two movies, after first money is not enough'.green
 begin

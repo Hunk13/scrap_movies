@@ -10,7 +10,8 @@ module ScrapMovies
       @money ||= Money.new(0)
     end
 
-    def show(params)
+    def show(**params)
+      return 'Send block' if block_given?
       mov = select_movie(params)
       raise("Not enough money. This movie cost #{mov.movie_price}. Your balance #{@money}") if @money < mov.movie_price
       show_movie(mov)
