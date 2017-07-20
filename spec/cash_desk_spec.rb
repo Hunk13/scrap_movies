@@ -26,9 +26,15 @@ module ScrapMovie
     end
 
     describe '#pay_money' do
-      subject { dummy.pay_money(50) }
+      subject { dummy.pay_money(amount) }
+
+      context 'negative amount cashbox' do
+        let(:amount) { -50 }
+        it { expect { subject }.to raise_error('Amount should be positive') }
+      end
 
       context 'moves sum of money to cashbox' do
+        let(:amount) { 50 }
         it { expect { subject }.to change { dummy.cash }.from('$0.00').to('$50.00') }
       end
     end
