@@ -2,6 +2,8 @@
 
 module ScrapMovies
   class Movie
+    class YearNotRange < StandardError; end
+
     attr_reader :link, :title, :year, :country, :date,
                 :genre, :length, :rating, :director, :actors
 
@@ -20,6 +22,8 @@ module ScrapMovies
     end
 
     def self.build(movie, movie_collection = nil)
+      year = movie[2].to_i
+      raise YearNotRange, "#{year} is not valid year" if year.to_i < 1900
       case movie[2].to_i
       when 1900...1945
         AncientMovie.new(movie, movie_collection)
