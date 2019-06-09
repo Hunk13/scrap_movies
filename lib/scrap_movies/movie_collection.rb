@@ -54,13 +54,13 @@ module ScrapMovies
     def show_movie(movie)
       start_time = Time.now
       end_time = start_time + movie.length * 60
-      print "Now showing: #{movie.title} #{start_time.strftime("%H:%M:%S")} - #{end_time.strftime("%H:%M:%S")}"
+      print "Now showing: #{movie.title} #{start_time.strftime('%H:%M:%S')} - #{end_time.strftime('%H:%M:%S')}"
     end
 
     def parse_file(file_name)
-      CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map {
-        |movie| Movie.build(movie, self)
-      }
+      CSV.foreach(file_name, col_sep: '|', headers: FIELDS).map do |movie|
+        Movie.build(movie, self)
+      end
     end
 
     def check_field!(*fields)

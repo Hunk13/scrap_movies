@@ -9,9 +9,9 @@ abort('Need only one parameter - file name.') if ARGV.length > 1
 file = ARGV[0] || scrap_file
 abort('File not exist.') unless File.exist?(file)
 
-array_of_movies = CSV.foreach(file, col_sep: '|', headers: FIELDS).map {
-  |line| OpenStruct.new(line.to_h)
-}
+array_of_movies = CSV.foreach(file, col_sep: '|', headers: FIELDS).map do |line|
+  OpenStruct.new(line.to_h)
+end
 
 def cool_print(input_hash)
   "#{input_hash[:title]} (#{input_hash[:date]}; #{input_hash[:genre]}) - #{input_hash[:length]}"
