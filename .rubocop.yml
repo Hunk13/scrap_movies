@@ -1,0 +1,15 @@
+AllCops:
+  TargetRubyVersion: 2.5.0
+  Exclude:
+    - 'spec/**/*'
+  DisplayStyleGuide: true
+Style/Documentation:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 30
+Metrics/LineLength:
+  Max: 120
+Style/CaseEquality:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
